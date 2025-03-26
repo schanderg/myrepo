@@ -18,9 +18,9 @@ jobs:
 
       - name: Mirror to GitLab
         run: |
-          git remote remove origin
-          git remote add origin https://gitlab.com/schanderg/learning4571813/Devops.git
-          git push --mirror origin
+          git remote remove gitlab
+          git remote add gitlab https://gitlab.com/schanderg/learning4571813/Devops.git
+          git push --mirror gitlab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
 
