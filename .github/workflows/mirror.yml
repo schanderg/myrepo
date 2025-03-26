@@ -1,0 +1,25 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches:
+      - main  # Replace with your default branch name
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour; adjust as needed
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Ensures the entire history is cloned
+
+      - name: Mirror to GitLab
+        run: |
+          git remote add gitlab https://gitlab.com/schanderg/myrepo.git
+          git push --mirror gitlab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+
